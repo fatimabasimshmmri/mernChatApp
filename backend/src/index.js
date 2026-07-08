@@ -8,7 +8,6 @@ dotenv.config({ path: '../.env' });
 import User from "./models/user.model.js"
 import { connectDB } from "./lib/db.js"
 
-
 const app = express()
 const port = process.env.PORT
 const frontend_url = process.env.FRONT_URL
