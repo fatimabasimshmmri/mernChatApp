@@ -26,17 +26,19 @@ app.use(clerkMiddleware())
 
 // -----        endpoints         -----
 
-if (fs.existsSync(publicDir)) {
-    app.use(express.static(publicDir))
-
-    app.get("/{*any}", (req, res) => {
-        res.sendFile(path.join(publicDir, 'index.html'), (err) => next(err))
-    })
-}
-
 app.get("/api/health", (req,res)=>{
     res.status(200).json({ok: true})
 })
+
+if (fs.existsSync(publicDir)) {
+    app.use(express.static(publicDir));
+    app.get("*", (req, res, next) => {
+        res.sendFile(path.join(publicDir, 'index.html'), (err) => {
+            if (err) next(err);
+        });
+    });
+}
+
 
 //listening
 app.listen(port, () => {
