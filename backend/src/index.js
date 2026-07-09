@@ -42,6 +42,6 @@ if (fs.existsSync(publicDir)) {
 
 //listening
 app.listen(port, () => {
-    connectDB()
+    await connectDB()
     console.log(`Listening on port ${port}`)
 })
