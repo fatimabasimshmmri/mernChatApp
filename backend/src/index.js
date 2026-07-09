@@ -30,6 +30,10 @@ app.get("/api/health", (req,res)=>{
     res.status(200).json({ok: true})
 })
 
+app.get("/api/test", (req,res)=>{
+    res.status(200).json({message: "Test endpoint is working!"})
+})
+
 if (fs.existsSync(publicDir)) {
     app.use(express.static(publicDir));
     app.get("*", (req, res, next) => {
@@ -42,6 +46,6 @@ if (fs.existsSync(publicDir)) {
 
 //listening
 app.listen(port, () => {
-    await connectDB()
+    connectDB()
     console.log(`Listening on port ${port}`)
 })
