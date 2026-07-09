@@ -33,7 +33,6 @@ app.get("/api/health", async (req,res)=>{
     catch (error) {
         console.error("Health check error: ", error.message)
         res.status(500).json({ok: false, error: error.message})
-
 }})
 
 
@@ -51,4 +50,6 @@ if (fs.existsSync(publicDir)) {
 app.listen(port, () => {
     connectDB()
     console.log(`Listening on port ${port}`)
+
+    if(process.env.NODE_ENV === "production")job.start()
 })
