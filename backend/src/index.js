@@ -29,16 +29,15 @@ app.use(clerkMiddleware())
 if (fs.existsSync(publicDir)) {
     app.use(express.static(publicDir))
 
-    apiRouter.get("/{*any}", (req, res) => {
+    app.get("/{*any}", (req, res) => {
         res.sendFile(path.join(publicDir, 'index.html'), (err) => next(err))
     })
 }
 
-apiRouter.get("/api/health", (req,res)=>{
+app.get("/api/health", (req,res)=>{
     res.status(200).json({ok: true})
 })
 
-app.use('/api', apiRouter);
 //listening
 app.listen(port, () => {
     connectDB()
