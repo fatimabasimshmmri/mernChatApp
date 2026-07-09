@@ -13,6 +13,7 @@ import { clerkMiddleware } from '@clerk/express'
 import { connectDB } from "./lib/db.js"
 
 const app = express()
+const apiRouter = express.Router();
 const port = process.env.PORT
 const frontend_url = process.env.FRONT_URL
 const publicDir = path.join(process.cwd(), 'public') //path to the public directory
@@ -28,15 +29,16 @@ app.use(clerkMiddleware())
 if (fs.existsSync(publicDir)) {
     app.use(express.static(publicDir))
 
-    app.get("/{*any}", (req, res) => {
+    apiRouter.get("/{*any}", (req, res) => {
         res.sendFile(path.join(publicDir, 'index.html'), (err) => next(err))
     })
 }
 
-app.get("/api/health", (req,res)=>{
+apiRouter.get("/api/health", (req,res)=>{
     res.status(200).json({ok: true})
 })
 
+app.use('/api', apiRouter);
 //listening
 app.listen(port, () => {
     connectDB()
