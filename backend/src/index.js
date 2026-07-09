@@ -33,7 +33,7 @@ if (fs.existsSync(publicDir)) {
     })
 }
 
-app.get("/health", (req,res)=>{
+app.get("/api/health", (req,res)=>{
     res.status(200).json({ok: true})
 })
 
