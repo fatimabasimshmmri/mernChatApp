@@ -26,13 +26,16 @@ app.use(clerkMiddleware())
 
 // -----        endpoints         -----
 
-app.get("/api/health", (req,res)=>{
-    res.status(200).json({ok: true})
-})
+app.get("/api/health", async (req,res)=>{
+    try {
+        res.status(200).json({ok: true})
+    }
+    catch (error) {
+        console.error("Health check error: ", error.message)
+        res.status(500).json({ok: false, error: error.message})
 
-app.get("/api/test", (req,res)=>{
-    res.status(200).json({message: "Test endpoint is working!"})
-})
+}})
+
 
 if (fs.existsSync(publicDir)) {
     app.use(express.static(publicDir));
