@@ -18,6 +18,13 @@ const port = process.env.PORT
 const frontend_url = process.env.FRONT_URL
 const publicDir = path.join(process.cwd(), 'public') //path to the public directory
 
+import clerkWebhook from "./clerk.webhook.js"
+import job from "./lib/job.js"
+
+// -----        webhooks          -----
+app.use("/api/webhooks/clerk", express.raw({type:"application/json"}),clerkWebhook)
+//      do not parse webhook events as json, clerk requires raw body to verify the signature
+
 // -----        middleware        -----
 app.use(express.json())
 app.use(cors({origin:frontend_url,credentials:true}))
