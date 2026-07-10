@@ -19,7 +19,7 @@ const frontend_url = process.env.FRONT_URL
 const publicDir = path.join(process.cwd(), 'public') //path to the public directory
 
 import clerkWebhook from "./clerk.webhook.js"
-import job from "./lib/job.js"
+import job from "./lib/cron.js"
 
 // -----        webhooks          -----
 app.use("/api/webhooks/clerk", express.raw({type:"application/json"}),clerkWebhook)
@@ -40,7 +40,7 @@ app.get("/api/health", async (req,res)=>{
     catch (error) {
         console.error("Health check error: ", error.message)
         res.status(500).json({ok: false, error: error.message})
-}})
+}})  
 
 
 if (fs.existsSync(publicDir)) {
