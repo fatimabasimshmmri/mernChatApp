@@ -22,7 +22,7 @@ import clerkWebhook from "./clerk.webhook.js"
 import job from "./lib/cron.js"
 
 // -----        webhooks          -----
-app.use("/api/webhooks/clerk", express.raw({type:"application/json"}),clerkWebhook)
+app.post("/api/webhooks/clerk", express.raw({type:"application/json"}),clerkWebhook)
 //      do not parse webhook events as json, clerk requires raw body to verify the signature
 
 // -----        middleware        -----
