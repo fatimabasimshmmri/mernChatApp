@@ -4,7 +4,7 @@ import { verifyWebhook } from "@clerk/backend/webhooks";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("", async (req, res) => {
   try {
     const signingSecret = process.env.CLERK_WEBHOOK_SIGNINGSECRET;
     if (!signingSecret) {

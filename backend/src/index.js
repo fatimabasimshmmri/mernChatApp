@@ -1,3 +1,5 @@
+import clerkWebhook from "./clerk.webhook.js"
+
 import dns from 'node:dns'; // google public DNS servers
 dns.setServers(['8.8.8.8', '8.8.4.4']); 
 
@@ -18,11 +20,11 @@ const port = process.env.PORT
 const frontend_url = process.env.FRONT_URL
 const publicDir = path.join(process.cwd(), 'public') //path to the public directory
 
-import clerkWebhook from "./clerk.webhook.js"
+
 import job from "./lib/cron.js"
 
 // -----        webhooks          -----
-app.use("/api/webhooks/clerk", (req,res,next) =>
+app.post("/api/webhooks/clerk", (req,res,next) =>
     {
         console.log("Webhook route hit. Method:", req.method, "Path:", req.path);
         next();
