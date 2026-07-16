@@ -24,7 +24,7 @@ const publicDir = path.join(process.cwd(), 'public') //path to the public direct
 import job from "./lib/cron.js"
 
 // -----        webhooks          -----
-app.post("/api/webhooks/clerk", (req,res,next) =>
+app.use("/api/webhooks/clerk", (req,res,next) =>
     {
         console.log("Webhook route hit. Method:", req.method, "Path:", req.path);
         next();
