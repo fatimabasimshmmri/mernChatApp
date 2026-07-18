@@ -24,12 +24,13 @@ const publicDir = path.join(process.cwd(), 'public') //path to the public direct
 import job from "./lib/cron.js"
 
 // -----        webhooks          -----
-/*app.use("/api/webhooks/clerk", (req,res,next) =>
+app.use("/api/webhooks/clerk", (req,res,next) =>
     {
         console.log("Webhook route hit. Method:", req.method, "Path:", req.path);
         next();
-    },  express.raw({type:"application/json"}),clerkWebhook)*/
+    },  express.raw({type:"application/json"}),clerkWebhook)
 
+/*
 app.post("/api/webhooks/clerk", (req, res, next) => {
     console.log("Webhook route hit. Method:", req.method, "Path:", req.path);
     next();
@@ -82,6 +83,7 @@ app.post("/api/webhooks/clerk", (req, res, next) => {
     }
   }
 )
+  */
 //      do not parse webhook events as json, clerk requires raw body to verify the signature
 
 // -----        middleware        -----
